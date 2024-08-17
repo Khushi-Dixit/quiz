@@ -3,26 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Truth?? - Welcome</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Quiz Website</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <div class="container">
-        <h1>Welcome to Truth??</h1>
-        <img src="https://i.pinimg.com/originals/5d/1a/79/5d1a7972473b8c146db7f7753e6cfae4.jpg" alt="Anime Welcome Image" class="center-img">
-        <h2>Do you want to create a quiz?</h2>
-        <button onclick="showQuizOptions()">Yes</button>
-        <button onclick="alert('Maybe next time!')">No</button>
-
-        <div id="quizOptions" style="display:none;">
-            <h3>Enter number of questions and options:</h3>
-            <label for="numQuestions">Number of Questions:</label>
-            <input type="number" id="numQuestions" min="1" max="10"><br/>
-            <label for="numOptions">Number of Options per Question:</label>
-            <input type="number" id="numOptions" min="2" max="5"><br/>
-            <button onclick="redirectToQuizCreation()">OK</button>
-        </div>
-    </div>
-    <script src="script.js"></script>
+    <h1>Welcome to the Quiz Website</h1>
+    <a href="{{ url_for('create_quiz') }}">Create a Quiz</a>
 </body>
 </html>
