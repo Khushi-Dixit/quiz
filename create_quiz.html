@@ -3,16 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Truth?? - Create Quiz</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Create a Quiz</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script>
+        function addQuestion() {
+            const questionCount = document.getElementById('total_questions');
+            const questionNumber = parseInt(questionCount.value) + 1;
+            questionCount.value = questionNumber;
+
+            const questionsDiv = document.getElementById('questions');
+            const newQuestionDiv = document.createElement('div');
+            newQuestionDiv.innerHTML = `
+                <label for="question_${questionNumber}">Question ${questionNumber}:</label>
+                <input type="text" name="question_${questionNumber}" required>
+                <label for="options_${questionNumber}">Number of Options:</label>
+                <input type="number" name="options_${questionNumber}" min="2" required>
+            `;
+            questionsDiv.appendChild(newQuestionDiv);
+        }
+    </script>
 </head>
 <body>
-    <div class="container">
-        <h2>Create Your Quiz</h2>
-        <form id="quizForm"></form>
-        <button onclick="submitQuizForm()">Submit</button>
-    </div>
-    <script src="script.js"></script>
+    <h1>Create a New Quiz</h1>
+    <form action="{{ url_for('create_quiz') }}" method="POST">
+        <label for="quiz_title">Quiz Title:</label>
+        <input type="text" name="quiz_title" required><br>
+        <input type="hidden" id="total_questions" name="total_questions" value="1">
+        <div id="questions">
+            <div>
+                <label for="question_1">Question 1:</label>
+                <input type="text" name="question_1" required>
+                <label for="options_1">Number of Options:</label>
+                <input type="number" name="options_1" min="2" required>
+            </div>
+        </div>
+        <button type="button" onclick="addQuestion()">Add Another Question</button>
+        <br>
+        <button type="submit">Create Quiz</button>
+    </form>
 </body>
 </html>
-
